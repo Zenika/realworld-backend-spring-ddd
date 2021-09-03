@@ -1,0 +1,27 @@
+# Création d'un article
+POST http://localhost:8080/api/articles
+accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{ auth_token }}
+
+{
+    "article": {
+        "body": "Un article sur Spring Test",
+        "description": "Spring test",
+        "tagList": [
+            "spring",
+            "testing"
+        ],
+        "title": "Spring test !"
+    }
+}
+
+###
+
+# Lister les articles
+
+GET http://localhost:8080/api/articles?limit=20&offset=0
+accept: application/json
+
+###
+

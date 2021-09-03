@@ -1,0 +1,38 @@
+# Create user
+
+POST http://localhost:8080/api/users
+accept: application/json
+Content-Type: application/json
+
+{
+    "user": {
+        "email": "zenika@zenika.com",
+        "password": "zenikazenika",
+        "username": "Zenika"
+    }
+}
+
+###
+
+# Login
+
+POST http://localhost:8080/api/users/login
+accept: application/json
+Content-Type: application/json
+
+{
+    "user": {
+        "email": "zenika@zenika.com",
+        "password": "zenikazenika"
+    }
+}
+
+> {%
+    client.test("Request executed successfully", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+        client.global.set("auth_token", response.body.user.token);
+    });
+%}
+
+###
+
