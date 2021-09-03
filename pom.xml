@@ -84,6 +84,11 @@
       <artifactId>failureaccess</artifactId>
       <version>${guava-failureaccess.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
 
 
     <!-- SpringFox has buggy dependency on swagger, so we override it here -->
