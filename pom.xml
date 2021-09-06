@@ -99,6 +99,11 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.intuit.karate</groupId>
+      <artifactId>karate-junit5</artifactId>
+      <version>1.0.1</version>
+    </dependency>
 
 
     <!-- SpringFox has buggy dependency on swagger, so we override it here -->
