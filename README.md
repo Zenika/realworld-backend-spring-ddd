@@ -42,6 +42,12 @@ infrastructure/         -> technical details layer
 
 # Getting started
 
+### Start a postgres database
+
+Easiest is with docker : `docker run --name realworld-postgres -e POSTGRES_PASSWORD=mysecretpassword -p5432:5432 -d postgres`
+
+Adjust application.properties if needed
+
 ### Start the local server
 
 ```bash

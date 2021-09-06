@@ -1,7 +1,7 @@
 package io.realworld.backend.application.util;
 
 import io.realworld.backend.application.exception.UserNotFoundException;
-import io.realworld.backend.domain.aggregate.user.User;
+import io.realworld.backend.domain.aggregate.user.ConduitUser;
 import io.realworld.backend.domain.service.AuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public abstract class BaseService {
    * @return current user
    * @throws UserNotFoundException if the current is anonymous
    */
-  public User currentUserOrThrow() {
+  public ConduitUser currentUserOrThrow() {
     return getAuthenticationService()
         .getCurrentUser()
         .orElseThrow(() -> new UserNotFoundException("Can not authenticate"));

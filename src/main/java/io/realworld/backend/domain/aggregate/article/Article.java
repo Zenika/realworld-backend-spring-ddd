@@ -2,7 +2,7 @@ package io.realworld.backend.domain.aggregate.article;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableSet;
-import io.realworld.backend.domain.aggregate.user.User;
+import io.realworld.backend.domain.aggregate.user.ConduitUser;
 import java.time.Instant;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
@@ -34,7 +34,7 @@ public class Article {
   @ElementCollection(fetch = FetchType.EAGER)
   private @NotNull Set<String> tags = ImmutableSet.of();
 
-  @ManyToOne private @NotNull User author = new User("", "", "");
+  @ManyToOne private @NotNull ConduitUser author = new ConduitUser("", "", "");
   private @NotNull Instant createdAt = Instant.now();
   private @NotNull Instant updatedAt = Instant.now();
 
@@ -87,11 +87,11 @@ public class Article {
     this.tags = ImmutableSet.copyOf(tags);
   }
 
-  public User getAuthor() {
+  public ConduitUser getAuthor() {
     return author;
   }
 
-  public void setAuthor(User author) {
+  public void setAuthor(ConduitUser author) {
     this.author = author;
   }
 

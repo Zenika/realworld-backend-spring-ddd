@@ -7,7 +7,7 @@ import io.realworld.backend.application.util.BaseService;
 import io.realworld.backend.domain.aggregate.follow.FollowRelation;
 import io.realworld.backend.domain.aggregate.follow.FollowRelationId;
 import io.realworld.backend.domain.aggregate.follow.FollowRelationRepository;
-import io.realworld.backend.domain.aggregate.user.User;
+import io.realworld.backend.domain.aggregate.user.ConduitUser;
 import io.realworld.backend.domain.aggregate.user.UserRepository;
 import io.realworld.backend.domain.service.AuthenticationService;
 import io.realworld.backend.rest.api.ProfileResponseData;
@@ -64,7 +64,7 @@ public class ProfileService extends BaseService implements ProfilesApiDelegate {
   @Override
   public ResponseEntity<ProfileResponseData> getProfileByUsername(String username) {
     final var currentUser = authenticationService.getCurrentUser();
-    Predicate<User> isFollowing =
+    Predicate<ConduitUser> isFollowing =
         (u) ->
             currentUser
                 .map(

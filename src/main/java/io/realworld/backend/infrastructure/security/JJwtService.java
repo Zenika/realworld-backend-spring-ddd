@@ -2,7 +2,7 @@ package io.realworld.backend.infrastructure.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.realworld.backend.domain.aggregate.user.User;
+import io.realworld.backend.domain.aggregate.user.ConduitUser;
 import io.realworld.backend.domain.aggregate.user.UserRepository;
 import io.realworld.backend.domain.service.JwtService;
 import java.util.Date;
@@ -36,7 +36,7 @@ public class JJwtService implements JwtService {
 
   /** {@inheritDoc} */
   @Override
-  public String generateToken(User user) {
+  public String generateToken(ConduitUser user) {
     return Jwts.builder()
         .setSubject(Long.toString(user.getId()))
         .setExpiration(new Date(System.currentTimeMillis() + sessionTime * 1000))
@@ -46,7 +46,7 @@ public class JJwtService implements JwtService {
 
   /** {@inheritDoc} */
   @Override
-  public Optional<User> getUser(String token) {
+  public Optional<ConduitUser> getUser(String token) {
     try {
       final var subject =
           Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();

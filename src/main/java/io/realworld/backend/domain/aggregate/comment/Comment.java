@@ -2,7 +2,7 @@ package io.realworld.backend.domain.aggregate.comment;
 
 import com.google.common.base.MoreObjects;
 import io.realworld.backend.domain.aggregate.article.Article;
-import io.realworld.backend.domain.aggregate.user.User;
+import io.realworld.backend.domain.aggregate.user.ConduitUser;
 import java.time.Instant;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +23,7 @@ public class Comment {
   private long id = 0;
 
   @ManyToOne private @NonNull Article article = new Article();
-  @ManyToOne private @NonNull User author = new User("", "", "");
+  @ManyToOne private @NonNull ConduitUser author = new ConduitUser("", "", "");
   private @NotNull String body = "";
   private @NotNull Instant createdAt = Instant.now();
   private @NotNull Instant updatedAt = Instant.now();
@@ -44,11 +44,11 @@ public class Comment {
     this.article = article;
   }
 
-  public User getAuthor() {
+  public ConduitUser getAuthor() {
     return author;
   }
 
-  public void setAuthor(User author) {
+  public void setAuthor(ConduitUser author) {
     this.author = author;
   }
 

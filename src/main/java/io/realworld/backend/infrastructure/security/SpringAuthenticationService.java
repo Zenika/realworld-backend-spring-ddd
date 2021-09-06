@@ -1,6 +1,6 @@
 package io.realworld.backend.infrastructure.security;
 
-import io.realworld.backend.domain.aggregate.user.User;
+import io.realworld.backend.domain.aggregate.user.ConduitUser;
 import io.realworld.backend.domain.aggregate.user.UserRepository;
 import io.realworld.backend.domain.service.AuthenticationService;
 import java.util.Optional;
@@ -24,7 +24,7 @@ public class SpringAuthenticationService implements AuthenticationService {
 
   /** {@inheritDoc} */
   @Override
-  public Optional<User> getCurrentUser() {
+  public Optional<ConduitUser> getCurrentUser() {
     final var authentication = SecurityContextHolder.getContext().getAuthentication();
     if (authentication == null) {
       return Optional.empty();
@@ -45,7 +45,7 @@ public class SpringAuthenticationService implements AuthenticationService {
 
   /** {@inheritDoc} */
   @Override
-  public Optional<User> authenticate(String email, String password) {
+  public Optional<ConduitUser> authenticate(String email, String password) {
     return userRepository
         .findByEmail(email)
         .flatMap(

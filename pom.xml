@@ -50,8 +50,8 @@
 
     <!-- Other dependencies: -->
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -211,10 +211,6 @@
               <version>${checkerframework.version}</version>
             </path>
           </annotationProcessorPaths>
-          <annotationProcessors>
-            <!-- Add all the checkers you want to enable here -->
-            <annotationProcessor>org.checkerframework.checker.nullness.NullnessChecker</annotationProcessor>
-          </annotationProcessors>
           <compilerArgs>
             <!-- <arg>-Awarns</arg> --> <!-- -Awarns turns type-checking errors into warnings. -->
             <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>

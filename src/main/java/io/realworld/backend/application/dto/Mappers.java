@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import io.realworld.backend.domain.aggregate.article.Article;
 import io.realworld.backend.domain.aggregate.comment.Comment;
-import io.realworld.backend.domain.aggregate.user.User;
+import io.realworld.backend.domain.aggregate.user.ConduitUser;
 import io.realworld.backend.rest.api.ArticleData;
 import io.realworld.backend.rest.api.CommentData;
 import io.realworld.backend.rest.api.MultipleArticlesResponseData;
@@ -31,7 +31,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 public class Mappers {
 
   /** Constructs UserResponseData response. */
-  public static UserResponseData toUserResponse(User u, @Nullable String token) {
+  public static UserResponseData toUserResponse(ConduitUser u, @Nullable String token) {
     final var userData = new UserData();
     userData.setUsername(u.getUsername());
     userData.setEmail(u.getEmail());
@@ -46,7 +46,7 @@ public class Mappers {
   }
 
   /** Updates user. * */
-  public static void updateUser(User user, UpdateUserData update) {
+  public static void updateUser(ConduitUser user, UpdateUserData update) {
     final var email = update.getEmail();
     if (email != null) {
       user.setEmail(email);
@@ -66,7 +66,7 @@ public class Mappers {
   }
 
   /** Constructs ProfileResponseData response. */
-  public static ProfileResponseData toProfileResponse(User user, boolean isFollowing) {
+  public static ProfileResponseData toProfileResponse(ConduitUser user, boolean isFollowing) {
     final var profileResponse = new ProfileResponseData();
     final ProfileData profile = toProfile(user, isFollowing);
     profileResponse.setProfile(profile);
@@ -74,7 +74,7 @@ public class Mappers {
   }
 
   /** Constructs ProfileData response. */
-  public static ProfileData toProfile(User user, boolean isFollowing) {
+  public static ProfileData toProfile(ConduitUser user, boolean isFollowing) {
     final var profile = new ProfileData();
     profile.setUsername(user.getUsername());
     user.getBio().ifPresent(profile::setBio);
@@ -111,7 +111,7 @@ public class Mappers {
   }
 
   /** Constructs Article from the request. */
-  public static Article fromNewArticleData(NewArticleData newArticleData, User user) {
+  public static Article fromNewArticleData(NewArticleData newArticleData, ConduitUser user) {
     final var article = new Article();
     article.setTitle(newArticleData.getTitle());
     article.setDescription(newArticleData.getDescription());
@@ -153,7 +153,7 @@ public class Mappers {
 
   /** Constructs Comment from the request. */
   public static Comment fromNewCommentData(
-      NewCommentData commentData, Article article, User author) {
+      NewCommentData commentData, Article article, ConduitUser author) {
     final var comment = new Comment();
     comment.setArticle(article);
     comment.setAuthor(author);

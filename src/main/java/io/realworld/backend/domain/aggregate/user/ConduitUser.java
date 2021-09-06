@@ -13,7 +13,7 @@ import org.checkerframework.framework.qual.TypeUseLocation;
 
 @Entity
 @DefaultQualifier(value = Nullable.class, locations = TypeUseLocation.FIELD)
-public class User {
+public class ConduitUser {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id = 0;
@@ -25,10 +25,10 @@ public class User {
   private String bio = null;
   private String image = null;
 
-  protected User() {}
+  protected ConduitUser() {}
 
   /** Creates User instance. */
-  public User(String email, String username, String passwordHash) {
+  public ConduitUser(String email, String username, String passwordHash) {
     this.email = email;
     this.username = username;
     this.passwordHash = passwordHash;

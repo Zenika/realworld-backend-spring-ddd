@@ -1,6 +1,6 @@
 package io.realworld.backend.infrastructure.security;
 
-import io.realworld.backend.domain.aggregate.user.User;
+import io.realworld.backend.domain.aggregate.user.ConduitUser;
 import io.realworld.backend.domain.service.JwtService;
 import java.io.IOException;
 import java.util.Collections;
@@ -40,7 +40,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
               jwtService
                   .getUser(token)
                   .ifPresent(
-                      (User user) -> {
+                      (ConduitUser user) -> {
                         UserDetails ud =
                             org.springframework.security.core.userdetails.User.withUsername(
                                     user.getEmail())

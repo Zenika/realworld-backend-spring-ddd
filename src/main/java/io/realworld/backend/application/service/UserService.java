@@ -8,7 +8,7 @@ import io.realworld.backend.application.exception.InvalidPasswordException;
 import io.realworld.backend.application.exception.UserNotFoundException;
 import io.realworld.backend.application.exception.UsernameAlreadyUsedException;
 import io.realworld.backend.application.util.BaseService;
-import io.realworld.backend.domain.aggregate.user.User;
+import io.realworld.backend.domain.aggregate.user.ConduitUser;
 import io.realworld.backend.domain.aggregate.user.UserRepository;
 import io.realworld.backend.domain.service.AuthenticationService;
 import io.realworld.backend.domain.service.JwtService;
@@ -68,7 +68,8 @@ public class UserService extends BaseService implements UserApiDelegate, UsersAp
               throw new EmailAlreadyUsedException("Email already used - " + email);
             });
     final var newUser =
-        new User(email, username, authenticationService.encodePassword(newUserData.getPassword()));
+        new ConduitUser(
+            email, username, authenticationService.encodePassword(newUserData.getPassword()));
     final var user = userRepository.save(newUser);
     return ok(toUserResponse(user, jwtService.generateToken(user)));
   }
