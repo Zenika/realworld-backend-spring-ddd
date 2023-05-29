@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import io.realworld.backend.domain.aggregate.user.ConduitUser;
 import io.realworld.backend.domain.aggregate.user.UserRepository;
 import io.realworld.backend.domain.service.AuthenticationService;
+import io.realworld.backend.rest.api.MultipleArticlesResponseData;
 import io.realworld.backend.rest.api.NewArticleData;
 import io.realworld.backend.rest.api.NewArticleRequestData;
 import io.realworld.backend.rest.api.SingleArticleResponseData;
@@ -38,6 +39,12 @@ class ArticleServiceTest {
   void setup() {
       final ConduitUser userForTests = userRepository.save(new ConduitUser("testing@training.com", "TestingTraining", "fakeHash"));
       Mockito.when(authenticationService.getCurrentUser()).thenReturn(Optional.of(userForTests));
+
+      // cleanup to have independant tests
+    final ResponseEntity<MultipleArticlesResponseData> allArticles = articleService.getArticles(null, null, null, 50, 0);
+    allArticles.getBody().getArticles().forEach(a -> {
+      articleService.deleteArticle(a.getSlug());
+    });
   }
 
   @Nested
@@ -51,6 +58,12 @@ class ArticleServiceTest {
         assertEquals("Test", createdArticleResponse.getBody().getArticle().getTitle());
         assertEquals("Toto", createdArticleResponse.getBody().getArticle().getBody());
         assertEquals("TestingTraining", createdArticleResponse.getBody().getArticle().getAuthor().getUsername());
+    }
+
+    @Test
+    void get_case() {
+        final ResponseEntity<MultipleArticlesResponseData> allArticles = articleService.getArticles(null, null, null, 50, 0);
+        assertEquals(0, allArticles.getBody().getArticles().size());
     }
   }
 }
