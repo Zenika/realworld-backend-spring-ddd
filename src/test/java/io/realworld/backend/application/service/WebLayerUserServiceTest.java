@@ -41,5 +41,14 @@ class WebLayerUserServiceTest {
             .statusCode(200)
             .body("user.email", equalTo("testing@training.com"));
 
+        with()
+            .header(new Header("Authorization", "Bearer " + token))
+            .header(new Header("Content-Type", "application/json"))
+            .body("{\"article\": {\"body\": \"Toto\", \"title\": \"Test\", \"description\": \"Desc\", \"tagList\": []}}")
+            .post("http://localhost:"+port+"/api/articles")
+            .then()
+            .statusCode(200)
+            .body("article.title", equalTo("Test"));
+
     }
 }
