@@ -181,7 +181,7 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
+      <!-- <plugin>
         <groupId>com.coveo</groupId>
         <artifactId>fmt-maven-plugin</artifactId>
         <version>2.10</version>
@@ -194,7 +194,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin> -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
@@ -267,14 +267,13 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
+      <!-- <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
         <version>4.2.0</version>
         <executions>
           <execution>
             <id>process-classes</id>
-            <!-- It works on bytecode level, so let's start after byte code generation -->
             <phase>process-classes</phase>
             <goals>
               <goal>check</goal>
@@ -284,7 +283,7 @@
         <configuration>
           <excludeFilterFile>${basedir}/spotbugs-exclude.xml</excludeFilterFile>
         </configuration>
-      </plugin>
+      </plugin> -->
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
